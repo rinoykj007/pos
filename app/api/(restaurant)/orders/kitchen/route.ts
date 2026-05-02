@@ -8,7 +8,7 @@ const path = '/api/orders/kitchen';
  * [GET] Fetch all pending and in-progress orders for kitchen display
  * Includes order details, items, table info, and waiter info
  */
-export async function GET(req: NextRequest) {
+export async function GET(_req: NextRequest) {
   try {
     const session = await auth();
     const userId = session?.user.id;
@@ -120,7 +120,7 @@ export async function PATCH(req: NextRequest) {
     const result = await mongoDb
       .collection('orders_table')
       .updateOne(
-        { _id: Number(orderId) },
+        { id: Number(orderId) },
         { $set: { status, updatedAt: new Date() } }
       );
 
