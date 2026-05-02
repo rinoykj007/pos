@@ -194,13 +194,13 @@ export function PrintReceiptDialog({ invoice, onClose }: PrintReceiptProps) {
 
     // Invoice number
     pdf.setFontSize(12);
-    pdf.setFont(undefined, 'bold');
+    pdf.setFont(pdf.getFont().fontName, 'bold');
     pdf.text(`INVOICE #${invoiceId}`, pageWidth / 2, yPosition, { align: 'center' });
     yPosition += 8;
 
     // Invoice details
     pdf.setFontSize(9);
-    pdf.setFont(undefined, 'normal');
+    pdf.setFont(pdf.getFont().fontName, 'normal');
     pdf.text(`Customer: ${customerName}`, margin, yPosition);
     yPosition += 5;
     pdf.text(`Order Type: ${orderType}`, margin, yPosition);
@@ -231,7 +231,7 @@ export function PrintReceiptDialog({ invoice, onClose }: PrintReceiptProps) {
     yPosition = (pdf as any).lastAutoTable.finalY + 5;
 
     // Totals
-    pdf.setFont(undefined, 'bold');
+    pdf.setFont(pdf.getFont().fontName, 'bold');
     pdf.text(`Subtotal: PKR ${parseFloat(subTotal).toFixed(2)}`, pageWidth - margin, yPosition, { align: 'right' });
     yPosition += 5;
 
@@ -254,7 +254,7 @@ export function PrintReceiptDialog({ invoice, onClose }: PrintReceiptProps) {
 
     // Footer
     pdf.setFontSize(9);
-    pdf.setFont(undefined, 'normal');
+    pdf.setFont(pdf.getFont().fontName, 'normal');
     pdf.text('Thank you for your purchase!', pageWidth / 2, pdf.internal.pageSize.getHeight() - 10, { align: 'center' });
 
     pdf.save(`Invoice_${invoiceId}.pdf`);

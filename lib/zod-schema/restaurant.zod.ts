@@ -104,7 +104,7 @@ export const invoiceFormSchema = z.object({
   orderType: z.enum(["dine_in", "drive_thru", "takeaway"], { error: "Please select an order type." }),
   subTotalAmount: z.string().max(11, { error: "Please check the subtotal amount." }),
   discount: z.string().max(11, { error: "Please check the discount amount." }),
-  discountType: z.enum(["percentage", "flat"]).default("percentage"),
+  discountType: z.enum(["percentage", "flat"]),
   totalAmount: z.string().max(11, { error: "Please check the total amount." }),
   advancePaid: z.string().max(11, { error: "Please check the advance paid amount." }),
   grandTotal: z.string().max(11, { error: "Please check the grand total amount." }),
@@ -157,7 +157,7 @@ export const invoiceActionFormSchema = z.object({
   // === Pricing Info ===
   subTotalAmount: z.string().refine(val => !isNaN(parseFloat(val)) && parseFloat(val) > 0, { message: "Subtotal must be greater than 0." }).transform(val => parseFloat(val).toFixed(2)),
   discount: z.string().refine(val => !isNaN(parseFloat(val)), { message: "Discount must be a number" }).transform(val => parseFloat(val).toFixed(2)),
-  discountType: z.enum(["percentage", "flat"]).default("percentage"),
+  discountType: z.enum(["percentage", "flat"]),
   totalAmount: z.string().refine(val => !isNaN(parseFloat(val)), { message: "Total must be a number" }).transform(val => parseFloat(val).toFixed(2)),
   advancePaid: z.string().refine(val => !isNaN(parseFloat(val)), { message: "Advance must be a number" }).transform(val => parseFloat(val).toFixed(2)),
   grandTotal: z.string().refine(val => !isNaN(parseFloat(val)) && parseFloat(val) >= 0, { message: "Grand total must be 0 or more" }).transform(val => parseFloat(val).toFixed(2)),

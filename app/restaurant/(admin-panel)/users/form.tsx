@@ -35,6 +35,7 @@ interface FormDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
   data: User | null
+  roles?: { value: string; label: string; badge?: string }[]
   [key: string]: unknown
 }
 

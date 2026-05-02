@@ -255,13 +255,13 @@ const GenerateInvoiceDialog = ({ mode, data, isOpen, setIsOpen }: GenerateInvoic
 
     // Invoice number
     pdf.setFontSize(12);
-    pdf.setFont(undefined, 'bold');
+    pdf.setFont(pdf.getFont().fontName, 'bold');
     pdf.text(`INVOICE #${displayInvoiceId}`, pageWidth / 2, yPosition, { align: 'center' });
     yPosition += 8;
 
     // Invoice details
     pdf.setFontSize(9);
-    pdf.setFont(undefined, 'normal');
+    pdf.setFont(pdf.getFont().fontName, 'normal');
     pdf.text(`Customer: ${displayCustomerName}`, margin, yPosition);
     yPosition += 5;
     pdf.text(`Order Type: ${orderType}`, margin, yPosition);
@@ -292,7 +292,7 @@ const GenerateInvoiceDialog = ({ mode, data, isOpen, setIsOpen }: GenerateInvoic
     yPosition = (pdf as any).lastAutoTable.finalY + 5;
 
     // Totals
-    pdf.setFont(undefined, 'bold');
+    pdf.setFont(pdf.getFont().fontName, 'bold');
     const subTotal = parseFloat((invoiceFooter?.subtotal ?? 0).toString()).toFixed(2);
     const discount = (invoiceFooter?.discount ?? 0).toString();
     const total = parseFloat((invoiceFooter?.total ?? 0).toString()).toFixed(2);
@@ -323,11 +323,11 @@ const GenerateInvoiceDialog = ({ mode, data, isOpen, setIsOpen }: GenerateInvoic
 
     // Payment Splits (if applicable)
     if (rawPaymentMethod === 'split' && paymentSplits.length > 0) {
-      pdf.setFont(undefined, 'bold');
+      pdf.setFont(pdf.getFont().fontName, 'bold');
       pdf.setFontSize(9);
       pdf.text('Payment Splits:', margin, yPosition);
       yPosition += 5;
-      pdf.setFont(undefined, 'normal');
+      pdf.setFont(pdf.getFont().fontName, 'normal');
       paymentSplits.forEach((split: any) => {
         const method = ((split.method ?? 'cash').charAt(0).toUpperCase() + (split.method ?? 'cash').slice(1));
         const amount = parseFloat(split.amount || '0').toFixed(2);
@@ -339,7 +339,7 @@ const GenerateInvoiceDialog = ({ mode, data, isOpen, setIsOpen }: GenerateInvoic
 
     // Footer
     pdf.setFontSize(9);
-    pdf.setFont(undefined, 'normal');
+    pdf.setFont(pdf.getFont().fontName, 'normal');
     pdf.text('Thank you for your purchase!', pageWidth / 2, pdf.internal.pageSize.getHeight() - 10, { align: 'center' });
 
     pdf.save(`Invoice_${displayInvoiceId}.pdf`);

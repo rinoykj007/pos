@@ -16,8 +16,9 @@ import { swrFetcher } from '@/lib/swr';
 import { PageLoadingScreen } from '@/components/fallbacks/loadings';
 
 
+import { Suspense } from 'react';
 
-const OrdersPage = () => {
+const OrdersPageContent = () => {
   const searchParams = useSearchParams();
   const editOrderId = searchParams.get('editOrder');
 
@@ -74,6 +75,14 @@ const OrdersPage = () => {
 
       </div>
     </OrderCartProvider>
+  );
+};
+
+const OrdersPage = () => {
+  return (
+    <Suspense fallback={<PageLoadingScreen />}>
+      <OrdersPageContent />
+    </Suspense>
   );
 };
 

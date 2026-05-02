@@ -43,7 +43,7 @@ interface FormDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   data: Role | null;
-  refetchPermissions: () => void | Promise<void>;
+  refetchPermissions?: () => void | Promise<void>;
   [key: string]: unknown;
 }
 
@@ -131,7 +131,7 @@ export function RoleForm({ open, onOpenChange, data, refetchPermissions }: FormD
 
       // === Success toast ===
       toast.success(result?.message || "Permissions updated successfully.");
-      refetchPermissions();
+      refetchPermissions?.();
       onOpenChange(false);
     } catch (error) {
       console.error("Unexpected error:", error);
