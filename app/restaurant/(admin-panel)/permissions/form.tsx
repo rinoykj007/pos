@@ -43,6 +43,7 @@ interface FormDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   data: Role | null;
+  refetchPermissions: () => void | Promise<void>;
   [key: string]: unknown;
 }
 
