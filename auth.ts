@@ -20,6 +20,7 @@ import { signInFormSchema } from './lib/zod-schema';
  */
 export const { handlers, signIn, signOut, auth } = NextAuth({
 
+  trustHost: true,
 
   /**
    * === Providers ===
